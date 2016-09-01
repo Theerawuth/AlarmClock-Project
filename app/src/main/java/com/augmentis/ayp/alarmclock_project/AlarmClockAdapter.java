@@ -37,7 +37,7 @@ public class AlarmClockAdapter extends RecyclerView.Adapter<AlarmClockHolder> {
 
         LayoutInflater layoutInflater = LayoutInflater.from(mActivity);
         View view = layoutInflater.inflate(R.layout.activity_alarm_clock_holder, parent, false);
-        return new AlarmClockHolder(view, mActivity);
+        return new AlarmClockHolder(view, parent.getContext());
     }
 
     @Override

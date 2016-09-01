@@ -1,15 +1,11 @@
 package com.augmentis.ayp.alarmclock_project;
 
-import android.app.Dialog;
 import android.app.IntentService;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.app.NotificationCompat;
-import android.support.v7.app.AlertDialog;
 import android.util.Log;
 
 import com.augmentis.ayp.alarmclock_project.Activity.AlarmClockActivity;
@@ -34,6 +30,8 @@ public class AlarmClockService extends IntentService {
     protected void onHandleIntent(Intent intent) {
 
         sendNotification("Wake up Wake up!!");
+
+        new ScreenShow().showOn(this);
 
     }
 

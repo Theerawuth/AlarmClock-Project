@@ -12,6 +12,8 @@ import android.util.Log;
 
 import com.augmentis.ayp.alarmclock_project.Fragment.AlarmClockFragment;
 
+import java.util.UUID;
+
 /**
  * Created by Theerawuth on 8/24/2016.
  */
@@ -19,9 +21,14 @@ public class AlarmClockReceiver extends WakefulBroadcastReceiver {
 
     private static final String TAG = "AlarmClockReceiver";
 
+    private int id = 0;
+
     @Override
     public void onReceive(Context context, Intent intent) {
         Log.d(TAG, "This is shown");
+
+        int mId = (int) intent.getExtras().get("MID");
+        UUID uuid = (UUID) intent.getExtras().get("UUID");
 
         //this will sound the alarm tone
         //this will sound the alarm once, if you wish to
@@ -35,12 +42,20 @@ public class AlarmClockReceiver extends WakefulBroadcastReceiver {
 
         //this will update the UI with Dialog
         AlarmClockFragment inst = AlarmClockFragment.instance();
-        inst.showAlertDialog(ringtone);
+        inst.showAlertDialog(ringtone,mId,uuid);
 
         //this will send a notification dialog
         ComponentName comp = new ComponentName(context.getPackageName(),
                 AlarmClockService.class.getName());
         startWakefulService(context, (intent.setComponent(comp)));
         setResultCode(Activity.RESULT_OK);
+
+
+        //multiple alert
+        Intent intent1 = new Intent(context, AlarmClockHolder.class);
+        intent1.setData(Uri.parse("alarm :" + (id++)));
+
+
+
     }
 }
